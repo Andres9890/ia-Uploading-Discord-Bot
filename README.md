@@ -33,3 +33,9 @@ pip install -r requirements.txt
 - to set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your archive.org email and password
 - Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token
 - simply run the bot and it should work
+
+---
+
+## Usage
+
+- `!upload <file(s)>`
