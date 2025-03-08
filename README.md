@@ -6,7 +6,7 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 
 ## Features
 
-- Upload files to Archive.org with the `!upload` command.
+- Upload files to Archive.org with a `/upload` command.
 - Supports multiple file attachments in a single command.
 - Automatically generates metadata for each upload, including:
   - A unique identifier.
@@ -23,7 +23,7 @@ Make sure you have the following installed before running the bot:
 - Required Python packages (see `requirements.txt`).
 
 Install dependencies using:
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 ---
 
@@ -38,4 +38,4 @@ pip install -r requirements.txt
 
 ## Usage
 
-- `!upload <file(s)>`
+- `/upload <file(s)>`
