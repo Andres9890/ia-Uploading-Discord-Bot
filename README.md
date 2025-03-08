@@ -11,7 +11,7 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 - Automatically generates metadata for each upload, including:
   - A unique identifier.
   - Descriptions based on the uploader's username and file names.
-- Cleans up temporary files after uploads.
+- Cleans up uploaded files after uploads.
 
 ---
 
