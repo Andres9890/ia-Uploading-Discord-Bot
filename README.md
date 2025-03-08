@@ -1,6 +1,6 @@
 # Archive.org Uploading Bot
 
-This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) via a simple command in a Discord server. It handles file attachments, generates unique identifiers for uploads, and automatically creates metadata for the uploaded files.
+This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) via a simple command in a Discord server. It handles file attachments, generates unique identifiers for uploads, and automatically creates metadata for each uploaded file.
 
 ---
 
