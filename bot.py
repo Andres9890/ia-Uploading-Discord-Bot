@@ -121,7 +121,7 @@ async def upload_files(
     # Prepare metadata
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
     metadata = {
-        "scanner": "The Archive.org Uploading File Mirroing Discord Bot",
+        "scanner": "Discord Bot",
         "collection": "opensource_media",
     }
 
