@@ -4,7 +4,7 @@ from discord import app_commands
 import os
 import re
 from datetime import datetime
-from internetarchive import upload
+from internetarchive import upload, get_item
 import asyncio
 from typing import Optional
 
@@ -27,6 +27,16 @@ def generate_unique_id(base_id):
     """Generate a unique identifier using the base ID and timestamp."""
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{base_id}-{timestamp}"
+
+async def check_item_exists(item_id):
+    """Check if an item with the given identifier already exists on Archive.org."""
+    try:
+        item = await asyncio.to_thread(get_item, item_id)
+        # If the item exists, it will have metadata
+        return item.exists
+    except Exception:
+        # If there's an error, assume the item doesn't exist
+        return False
 
 @bot.event
 async def on_ready():
@@ -99,12 +109,19 @@ async def upload_files(
     else:
         base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}".lower()
 
-    item_id = generate_unique_id(base_item_id)
+    # First try using the base ID without a timestamp
+    item_id = base_item_id
+    
+    # Check if the item already exists
+    if await check_item_exists(item_id):
+        # If it exists, then add the timestamp
+        item_id = generate_unique_id(base_item_id)
+        await interaction.followup.send(f"Identifier `{base_item_id}` already exists, using `{item_id}` instead.")
 
     # Prepare metadata
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
     metadata = {
-        "scanner": "Discord Bot Upload",
+        "scanner": "The Archive.org Uploading File Mirroing Discord Bot",
         "collection": "opensource_media",
     }
 
