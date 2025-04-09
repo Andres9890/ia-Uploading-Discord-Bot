@@ -131,7 +131,7 @@ async def upload_files(
             "description": f"Uploaded via Discord bot by {interaction.user.name}: {attachments[0].filename}",
         })
     else:
-        # for Multiple files generic title, include a list in description
+        # for Multiple files, use a generic title, include a list in description
         metadata.update({
             "title": f"Files uploaded by {interaction.user.name}",
             "description": (
@@ -146,7 +146,7 @@ async def upload_files(
 
     try:
         await asyncio.to_thread(do_upload)
-        # Notify success
+        # Notify user with success
         if file_count == 1:
             await interaction.followup.send(
                 f"File successfully uploaded to Archive.org! [View it here](https://archive.org/details/{item_id})"
@@ -158,7 +158,7 @@ async def upload_files(
     except Exception as e:
         await interaction.followup.send(f"An error occurred during upload: {e}")
     finally:
-        # Clean up the saved files
+        # Clean up the saved files after it's done
         for path in file_paths:
             if os.path.exists(path):
                 os.remove(path)
