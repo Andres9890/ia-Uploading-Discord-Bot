@@ -16,7 +16,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Set up the bot with an activity status
+# Set up the bot with an activity status (Optional)
 activity = discord.Activity(
     name="github.com/Andres9890/Archive.org-uploading-Discord-Bot",
     type=discord.ActivityType.playing,
@@ -40,9 +40,8 @@ async def check_item_exists(item_id):
 
 @bot.event
 async def on_ready():
-    # Sync the slash commands when the bot is ready
     await bot.tree.sync()
-    print(f"Logged in as {bot.user}")
+    print(f"Your bot is online.")
 
 @bot.tree.command(name="upload", description="Upload up to 10 files to Archive.org")
 @app_commands.describe(
@@ -82,12 +81,12 @@ async def upload_files(
     all_files = [file1, file2, file3, file4, file5, file6, file7, file8, file9, file10]
     attachments = [f for f in all_files if f is not None]
 
-    # Check if we actually have any attachments (should always have at least one: file1)
+    # Check if the bot actually have any attachments (should always have at least one file)
     if not attachments:
         await interaction.followup.send("No files attached. Please provide at least one file.")
         return
 
-    # Check each attachment's size and save them locally
+    # Check each attachment's size and save them locally (You can change the size)
     file_paths = []
     for attachment in attachments:
         if attachment.size > 100 * 1024 * 1024:
@@ -102,14 +101,14 @@ async def upload_files(
     await interaction.followup.send(f"Uploading {file_count} file(s) to Archive.org...")
 
     # Generate an item identifier
-    #  - If only one file, use the sanitized filename as the base
-    #  - If multiple, use a "discord-upload-{username}" style base
+    #  If only one file, use the sanitized filename as the base
+    #  If multiple, use a "discord-upload-{username}" style base
     if file_count == 1:
         base_item_id = re.sub(r'[^a-z0-9._-]', '_', attachments[0].filename.lower())
     else:
         base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}".lower()
 
-    # First try using the base ID without a timestamp
+    # First try using the base ID without a timestamp to make sure
     item_id = base_item_id
     
     # Check if the item already exists
@@ -118,7 +117,7 @@ async def upload_files(
         item_id = generate_unique_id(base_item_id)
         await interaction.followup.send(f"Identifier `{base_item_id}` already exists, using `{item_id}` instead.")
 
-    # Prepare metadata
+    # Prepare the metadata (You can change it to whatever you want)
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
     metadata = {
         "scanner": "Discord Bot",
@@ -126,13 +125,13 @@ async def upload_files(
     }
 
     if file_count == 1:
-        # Single file: use the filename in the title/description
+        # for Single files use the filename in the title/description
         metadata.update({
             "title": attachments[0].filename,
             "description": f"Uploaded via Discord bot by {interaction.user.name}: {attachments[0].filename}",
         })
     else:
-        # Multiple files: generic title, include a list in description
+        # for Multiple files generic title, include a list in description
         metadata.update({
             "title": f"Files uploaded by {interaction.user.name}",
             "description": (
@@ -141,7 +140,7 @@ async def upload_files(
             ),
         })
 
-    # Run the upload in a separate thread
+    # Run the upload in a separate thread to prevent Rate limiting
     def do_upload():
         upload(identifier=item_id, files=file_paths, metadata=metadata)
 
