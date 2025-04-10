@@ -1,17 +1,17 @@
 # Archive.org Uploading Bot
 
-This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in a Discord server or message. It handles file attachments, generates unique identifiers for uploads, and automatically creates metadata for each uploaded file.
+This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in a Discord server or message, It handles file attachments, generates unique identifiers for uploads, and automatically creates metadata for each uploaded file
 
 ---
 
 ## Features
 
-- Upload files to Archive.org with a `/upload` command.
-- Supports multiple file attachments in a single command.
+- Upload files to Archive.org with a `/upload` command
+- Supports multiple file attachments in a single command
 - Automatically generates metadata for each upload, including:
-  - A unique identifier.
-  - Descriptions based on the uploader's username and file names.
-- Cleans up uploaded files after uploads.
+  - A unique identifier
+  - Descriptions based on the uploader's username and file names
+- Cleans up uploaded files after uploads
 
 ---
 
@@ -30,8 +30,8 @@ Install dependencies using:
 ## how to set up the bot
 
 - install the requirements in requirements.txt
-- to set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your archive.org email and password
-- Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token
+- To set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your Archive.org email and password
+- Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token (Using a .env solution is more recommended)
 - simply run the bot and it should work
 
 ---
