@@ -20,7 +20,7 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 Make sure you have the following installed before running the bot:
 
 - Python 3.8 and up
-- Required Python packages (see `requirements.txt`).
+- Required python packages (see `requirements.txt`).
 
 Install dependencies using:
 `pip install -r requirements.txt`
