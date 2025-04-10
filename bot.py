@@ -29,13 +29,13 @@ def generate_unique_id(base_id):
     return f"{base_id}-{timestamp}"
 
 async def check_item_exists(item_id):
-    """Check if an item with the given identifier already exists on Archive.org."""
+    """Check if an item with the given identifier already exists on Archive.org"""
     try:
         item = await asyncio.to_thread(get_item, item_id)
         # If the item exists, it will have metadata
         return item.exists
     except Exception:
-        # If there's an error, assume the item doesn't exist
+        # If there's an error, the item doesn't exist
         return False
 
 @bot.event
@@ -70,8 +70,8 @@ async def upload_files(
     file10: Optional[discord.Attachment] = None
 ):
     """
-    Slash command that uploads up to 10 attachments to Archive.org.
-    The first file is required, while the remaining 9 are optional.
+    Slash command that uploads up to 10 attachments to Archive.org
+    The first file is required, the other 9 are optional
     """
 
     # Defer the interaction since uploading can take time
@@ -131,7 +131,7 @@ async def upload_files(
             "description": f"Uploaded via Discord bot by {interaction.user.name}: {attachments[0].filename}",
         })
     else:
-        # for Multiple files, use a generic title, include a list in description
+        # for Multiple files, use a generic title, and include a list in description
         metadata.update({
             "title": f"Files uploaded by {interaction.user.name}",
             "description": (
@@ -140,7 +140,7 @@ async def upload_files(
             ),
         })
 
-    # Run the upload in a separate thread to prevent Rate limiting
+    # Run the upload in a separate thread to prevent Rate-limiting
     def do_upload():
         upload(identifier=item_id, files=file_paths, metadata=metadata)
 
