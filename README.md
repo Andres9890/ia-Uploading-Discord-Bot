@@ -15,24 +15,23 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 
 ---
 
+## how to set up the bot
+
+- clone this repo
+- extract it in a safe folder
+- install the requirements.txt (`pip install -r requirements.txt`)
+- To set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your Archive.org email and password
+- Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token (Using a .env is more recommended)
+- simply run the bot and it should work
+
+---
+
 ## Requirements
 
 Make sure you have the following installed before running the bot:
 
 - Python 3.8 and up
-- Required python packages (see `requirements.txt`)
-
-Install dependencies using:
-`pip install -r requirements.txt`
-
----
-
-## how to set up the bot
-
-- install the requirements in requirements.txt
-- To set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your Archive.org email and password
-- Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token (Using a .env solution is more recommended)
-- simply run the bot and it should work
+- Required python packages (`requirements.txt`)
 
 ---
 
