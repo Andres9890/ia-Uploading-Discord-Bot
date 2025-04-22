@@ -1,14 +1,4 @@
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    .menu-toggle {
-        display: block;
-    }
-    
-    .nav.active .nav-links {
-        display: flex:root {
+:root {
     --discord-dark: #23272A;
     --discord-dark-secondary: #2C2F33;
     --discord-blurple: #5865F2;
