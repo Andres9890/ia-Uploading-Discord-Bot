@@ -18,7 +18,7 @@ jobs:
 
       # 2. Upload the original requirements.txt
       - name: Upload old requirements.txt
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: old-requirements
           path: requirements.txt
@@ -53,7 +53,7 @@ jobs:
 
       # 6. Upload the updated requirements.txt
       - name: Upload updated requirements.txt
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: updated-requirements
           path: requirements.txt
