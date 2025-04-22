@@ -1,4 +1,4 @@
-name: Update requirements.txt
+name: Update Python requirements
 
 # runs every day at midnight UTC
 on:
@@ -14,10 +14,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # Allow the action to push back
           persist-credentials: true
 
-      # 2. Set up Python and virtualenv
+      # 2. Upload the original requirements.txt
+      - name: Upload old requirements.txt
+        uses: actions/upload-artifact@v3
+        with:
+          name: old-requirements
+          path: requirements.txt
+
+      # 3. Set up Python & venv
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -31,22 +37,28 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      # 3. Upgrade just the two packages you care about
+      # 4. Upgrade only discord.py & internetarchive
       - name: Upgrade discord.py & internetarchive
         run: |
           source .venv/bin/activate
           pip install --upgrade discord.py internetarchive
 
-      # 4. Re‑freeze only those two into requirements.txt
+      # 5. Rewrite requirements.txt with just those two packages
       - name: Write only discord.py & internetarchive to requirements.txt
         run: |
           source .venv/bin/activate
-          # grab only those two lines
           pip freeze \
             | grep -E '^(discord\.py|internetarchive)==' \
             > requirements.txt
 
-      # 5. Commit & push only if there are changes
+      # 6. Upload the updated requirements.txt
+      - name: Upload updated requirements.txt
+        uses: actions/upload-artifact@v3
+        with:
+          name: updated-requirements
+          path: requirements.txt
+
+      # 7. Commit & push if anything changed
       - name: Commit & push updated requirements
         run: |
           git config user.name "github-actions[bot]"
@@ -55,6 +67,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to requirements.txt"
           else
-            git commit -m "chore: nightly update requirements.txt"
+            git commit -m "chore: nightly update discord.py & internetarchive"
             git push
           fi
