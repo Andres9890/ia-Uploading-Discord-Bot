@@ -3,7 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-  <div>
-    Hi there, this page is currently under construction, so uh yeah
+    <title>Archive.org Uploading Discord Bot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hero">
+        <div class="nav">
+            <a href="./index" class="logo-link">
+                <div class="logo">
+                    <img src="icon/Archive.org.svg" alt="Archive.org logo" class="logo-img">
+                    <span>Archive.org Uploading Discord Bot</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <div class="dark-mode-container">
+                    <span class="dark-mode-label">Dark Mode</span>
+                    <div class="dark-mode-toggle" id="darkModeToggle">
+                        <div class="toggle-circle">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="#features">Features</a>
+                <a href="#setup">Setup</a>
+                <a href="#source">Source Code</a>
+                <a href="https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot" class="github-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+            <div class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
+        <div class="hero-content">
+            <h1>Archive.org Uploading Discord Bot</h1>
+            <p>Easily upload files from Discord to Archive.org with a simple slash command.</p>
+            <div class="hero-buttons">
+                <a href="#setup" class="btn primary">Get Started</a>
+                <a href="https://andres9890.github.io/Archive.org-Uploading-Discord-Bot/bot.py" class="btn secondary">Download</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wave-divider">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#23272A" fill-opacity="1" d="M0,192L48,186.7C96,181,192,171,288,181.3C384,192,480,224,576,224C672,224,768,192,864,186.7C960,181,1056,203,1152,202.7C1248,203,1344,181,1392,170.7L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+    </div>
+
+    <section id="features" class="features">
+        <h2>Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Upload Up to 10 Files</h3>
+                <p>Upload multiple files at once with a simple slash command in Discord.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Get Direct Links</h3>
+                <p>Receive instant links to your uploaded content on Archive.org.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-box-archive"></i>
+                </div>
+                <h3>Automatic Metadata</h3>
+                <p>Bot automatically handles metadata creation for your uploads.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup" class="setup">
+        <h2>Setup Instructions</h2>
+        <div class="setup-container">
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Install Git</h3>
+                        <p>Install Git on your operating system to clone the repository.</p>
+                        <div class="os-selection">
+                            <div class="os-buttons">
+                                <button class="os-btn" data-os="windows">
+                                    <i class="fab fa-windows"></i> Windows
+                                </button>
+                                <button class="os-btn" data-os="macos">
+                                    <i class="fab fa-apple"></i> macOS
+                                </button>
+                                <button class="os-btn" data-os="linux">
+                                    <i class="fab fa-linux"></i> Linux
+                                </button>
+                            </div>
+                            <div class="os-instructions" id="git-instructions" style="display: none;">
+                                <div class="os-instruction" id="git-windows">
+                                    <h4>Install Git on Windows</h4>
+                                    <ol>
+                                        <li>Download the Git installer from <a href="https://git-scm.com/download/win" target="_blank">git-scm.com</a></li>
+                                        <li>Run the installer and follow the installation wizard</li>
+                                        <li>Accept the default options or customize as needed</li>
+                                        <li>After installation, open Command Prompt or Git Bash to use Git</li>
+                                    </ol>
+                                </div>
+                                <div class="os-instruction" id="git-macos">
+                                    <h4>Install Git on macOS</h4>
+                                    <ol>
+                                        <li>Open Terminal</li>
+                                        <li>Install Git using Homebrew (recommended):
+                                            <div class="code-snippet">
+                                                <pre><code>brew install git</code></pre>
+                                                <button class="copy-btn" data-clipboard-text="brew install git">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li>If you don't have Homebrew, install it first:
+                                            <div class="code-snippet">
+                                                <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+                                                <button class="copy-btn" data-clipboard-text='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'>
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li>Alternatively, download from <a href="https://git-scm.com/download/mac" target="_blank">git-scm.com</a></li>
+                                    </ol>
+                                </div>
+                                <div class="os-instruction" id="git-linux">
+                                    <h4>Install Git on Linux</h4>
+                                    <h5>Debian/Ubuntu:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo apt update
+                                        sudo apt install git</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo apt update
+                                        sudo apt install git">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <h5>Fedora:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo dnf install git</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo dnf install git">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <h5>Arch Linux:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo pacman -S git</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo pacman -S git">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Clone Repository</h3>
+                        <p>Clone this repository to your local machine.</p>
+                        <div class="code-snippet">
+                            <pre><code>git clone https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot.git</code></pre>
+                            <button class="copy-btn" data-clipboard-text="git clone https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot.git">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Extract Files</h3>
+                        <p>Extract the repository in a safe folder on your system.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Install Python</h3>
+                        <p>Install Python 3.8 or higher on your operating system.</p>
+                        <div class="os-selection">
+                            <div class="os-buttons">
+                                <button class="os-btn" data-os="windows-py">
+                                    <i class="fab fa-windows"></i> Windows
+                                </button>
+                                <button class="os-btn" data-os="macos-py">
+                                    <i class="fab fa-apple"></i> macOS
+                                </button>
+                                <button class="os-btn" data-os="linux-py">
+                                    <i class="fab fa-linux"></i> Linux
+                                </button>
+                            </div>
+                            <div class="os-instructions" id="python-instructions" style="display: none;">
+                                <div class="os-instruction" id="python-windows-py">
+                                    <h4>Install Python on Windows</h4>
+                                    <ol>
+                                        <li>Download the latest Python installer from <a href="https://www.python.org/downloads/windows/" target="_blank">python.org</a></li>
+                                        <li>Run the installer</li>
+                                        <li>Check "Add Python to PATH" during installation</li>
+                                        <li>Click "Install Now" for a standard installation</li>
+                                        <li>Verify installation by opening Command Prompt and typing:
+                                            <div class="code-snippet">
+                                                <pre><code>python --version</code></pre>
+                                                <button class="copy-btn" data-clipboard-text="python --version">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="os-instruction" id="python-macos-py">
+                                    <h4>Install Python on macOS</h4>
+                                    <ol>
+                                        <li>Using Homebrew (recommended):
+                                            <div class="code-snippet">
+                                                <pre><code>brew install python</code></pre>
+                                                <button class="copy-btn" data-clipboard-text="brew install python">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li>Alternatively, download from <a href="https://www.python.org/downloads/macos/" target="_blank">python.org</a></li>
+                                        <li>Verify installation:
+                                            <div class="code-snippet">
+                                                <pre><code>python3 --version</code></pre>
+                                                <button class="copy-btn" data-clipboard-text="python3 --version">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="os-instruction" id="python-linux-py">
+                                    <h4>Install Python on Linux</h4>
+                                    <h5>Debian/Ubuntu:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo apt update
+                                        sudo apt install python3 python3-pip</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo apt update
+                                        sudo apt install python3 python3-pip">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <h5>Fedora:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo dnf install python3 python3-pip</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo dnf install python3 python3-pip">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <h5>Arch Linux:</h5>
+                                    <div class="code-snippet">
+                                        <pre><code>sudo pacman -S python python-pip</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="sudo pacman -S python python-pip">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <p>Verify installation:</p>
+                                    <div class="code-snippet">
+                                        <pre><code>python3 --version</code></pre>
+                                        <button class="copy-btn" data-clipboard-text="python3 --version">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Install Requirements</h3>
+                        <p>Install the required dependencies using pip.</p>
+                        <div class="code-snippet">
+                            <pre><code>pip install -r requirements.txt</code></pre>
+                            <button class="copy-btn" data-clipboard-text="pip install -r requirements.txt">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Configure Archive.org</h3>
+                        <p>Set up your Archive.org account credentials.</p>
+                        <div class="code-snippet">
+                            <pre><code>ia configure</code></pre>
+                            <button class="copy-btn" data-clipboard-text="ia configure">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <p class="note">Follow the prompts to enter your Archive.org email and password.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>Set Bot Token</h3>
+                        <p>Replace "YOUR_DISCORD_BOT_TOKEN" with your actual Discord bot token.</p>
+                        <p class="note">Using a .env file for token storage is recommended for security.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h3>Run the Bot</h3>
+                        <p>Start the bot using Python.</p>
+                        <div class="code-snippet">
+                            <pre><code>python bot.py</code></pre>
+                            <button class="copy-btn" data-clipboard-text="python bot.py">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="source" class="source">
+        <h2>Source Code</h2>
+        <div class="source-container">
+            <div class="source-header">
+                <h3>bot.py</h3>
+                <div class="buttons">
+                    <a href="https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/bot.py" class="view-btn">
+                        <i class="fas fa-code"></i> View on GitHub
+                    </a>
+                    <a href="https://andres9890.github.io/Archive.org-Uploading-Discord-Bot/bot.py" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            <div class="code-viewer">
+                <pre><code id="source-code" class="language-python">import discord
+from discord.ext import commands
+from discord import app_commands
+import os
+import re
+from datetime import datetime
+from internetarchive import upload, get_item
+import asyncio
+from typing import Optional
+
+DISCORD_BOT_TOKEN = "YOUR_DISCORD_BOT_TOKEN"
+
+intents = discord.Intents.default()
+intents.messages = True
+intents.message_content = True
+
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+# Set up the bot with an activity status (Optional)
+activity = discord.Activity(
+    name="github.com/Andres9890/Archive.org-uploading-Discord-Bot",
+    type=discord.ActivityType.playing,
+)
+bot.activity = activity
+
+def generate_unique_id(base_id):
+    """Generate a unique identifier using the base ID and timestamp."""
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    return f"{base_id}-{timestamp}"
+
+async def check_item_exists(item_id):
+    """Check if an item with the given identifier already exists on Archive.org"""
+    try:
+        item = await asyncio.to_thread(get_item, item_id)
+        # If the item exists, it will have metadata
+        return item.exists
+    except Exception:
+        # If there's an error, the item doesn't exist
+        return False
+
+@bot.event
+async def on_ready():
+    await bot.tree.sync()
+    print(f"Your bot is online.")
+
+@bot.tree.command(name="upload", description="Upload up to 10 files to Archive.org")
+@app_commands.describe(
+    file1="Required file (up to 100MB)",
+    file2="Optional file (up to 100MB)",
+    file3="Optional file (up to 100MB)",
+    file4="Optional file (up to 100MB)",
+    file5="Optional file (up to 100MB)",
+    file6="Optional file (up to 100MB)",
+    file7="Optional file (up to 100MB)",
+    file8="Optional file (up to 100MB)",
+    file9="Optional file (up to 100MB)",
+    file10="Optional file (up to 100MB)",
+)
+async def upload_files(
+    interaction: discord.Interaction,
+    file1: discord.Attachment,
+    file2: Optional[discord.Attachment] = None,
+    file3: Optional[discord.Attachment] = None,
+    file4: Optional[discord.Attachment] = None,
+    file5: Optional[discord.Attachment] = None,
+    file6: Optional[discord.Attachment] = None,
+    file7: Optional[discord.Attachment] = None,
+    file8: Optional[discord.Attachment] = None,
+    file9: Optional[discord.Attachment] = None,
+    file10: Optional[discord.Attachment] = None
+):
+    """
+    Slash command that uploads up to 10 attachments to Archive.org
+    The first file is required, the other 9 are optional
+    """
+
+    # Defer the interaction since uploading can take time
+    await interaction.response.defer()
+
+    # Gather all provided (non-None) attachments
+    all_files = [file1, file2, file3, file4, file5, file6, file7, file8, file9, file10]
+    attachments = [f for f in all_files if f is not None]
+
+    # Check if the bot actually have any attachments (should always have at least one file)
+    if not attachments:
+        await interaction.followup.send("No files attached. Please provide at least one file.")
+        return
+
+    # Check each attachment's size and save them locally (You can change the size)
+    file_paths = []
+    for attachment in attachments:
+        if attachment.size > 100 * 1024 * 1024:
+            await interaction.followup.send(f"File `{attachment.filename}` exceeds the 100MB limit.")
+            return
+
+        file_path = f"./{attachment.filename}"
+        await attachment.save(file_path)
+        file_paths.append(file_path)
+
+    file_count = len(file_paths)
+    await interaction.followup.send(f"Uploading {file_count} file(s) to Archive.org...")
+
+    # Generate an item identifier
+    #  If only one file, use the sanitized filename as the base
+    #  If multiple, use a "discord-upload-{username}" style base
+    if file_count == 1:
+        base_item_id = re.sub(r'[^a-z0-9._-]', '_', attachments[0].filename.lower())
+    else:
+        base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}".lower()
+
+    # First try using the base ID without a timestamp to make sure
+    item_id = base_item_id
+    
+    # Check if the item already exists
+    if await check_item_exists(item_id):
+        # If it exists, then add the timestamp
+        item_id = generate_unique_id(base_item_id)
+        await interaction.followup.send(f"Identifier `{base_item_id}` already exists, using `{item_id}` instead.")
+
+    # Prepare the metadata (You can change it to whatever you want)
+    file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
+    metadata = {
+        "scanner": "Discord Bot",
+        "collection": "opensource_media",
+    }
+
+    if file_count == 1:
+        # for Single files use the filename in the title/description
+        metadata.update({
+            "title": attachments[0].filename,
+            "description": f"Uploaded via Discord bot by {interaction.user.name}: {attachments[0].filename}",
+        })
+    else:
+        # for Multiple files, use a generic title, and include a list in description
+        metadata.update({
+            "title": f"Files uploaded by {interaction.user.name}",
+            "description": (
+                f"Uploaded via Discord bot by {interaction.user.name}.\n\n"
+                f"Uploaded files:\n{file_list_str}"
+            ),
+        })
+
+    # Run the upload in a separate thread to prevent Rate-limiting
+    def do_upload():
+        upload(identifier=item_id, files=file_paths, metadata=metadata)
+
+    try:
+        await asyncio.to_thread(do_upload)
+        # Notify user with success
+        if file_count == 1:
+            await interaction.followup.send(
+                f"File successfully uploaded to Archive.org! [View it here](https://archive.org/details/{item_id})"
+            )
+        else:
+            await interaction.followup.send(
+                f"Files successfully uploaded to Archive.org! [View them here](https://archive.org/details/{item_id})"
+            )
+    except Exception as e:
+        await interaction.followup.send(f"An error occurred during upload: {e}")
+    finally:
+        # Clean up the saved files after it's done
+        for path in file_paths:
+            if os.path.exists(path):
+                os.remove(path)
+
+bot.run(DISCORD_BOT_TOKEN)</code></pre>
+            </div>
+        </div>
+        <div class="requirements">
+            <h3>requirements.txt</h3>
+            <div class="code-snippet">
+                <pre><code>discord.py==2.5.2
+internetarchive==5.3.1</code></pre>
+                <button class="copy-btn" data-clipboard-text="discord.py==2.5.2
+internetarchive==5.3.1">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="cta-content">
+            <h2>Ready to Start Archiving?</h2>
+            <p>Get your Discord Bot set up in minutes and start preserving content on Archive.org!</p>
+            <div class="cta-buttons">
+                <a href="https://andres9890.github.io/Archive.org-Uploading-Discord-Bot/bot.py" class="btn primary">Download Now</a>
+                <a href="https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot" class="btn secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://andres9890.github.io/Archive.org-Uploading-Discord-Bot/icon/Archive.org.svg" alt="Archive.org logo" class="logo-img">
+                <span>Archive.org Uploading Discord Bot</span>
+            </div>
+            <p>Created by <a href="https://github.com/Andres9890">Andres99</a></p>
+            <div class="footer-links">
+                <a href="#features">Features</a>
+                <a href="#setup">Setup</a>
+                <a href="#source">Source Code</a>
+                <a href="https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot">GitHub</a>
+            </div>
+            <div class="disclaimer">
+                <p>I AM NOT AFFILIATED WITH THE INTERNET ARCHIVE IN ANY WAY</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
