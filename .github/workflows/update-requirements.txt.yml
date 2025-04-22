@@ -1,0 +1,57 @@
+name: Update Python requirements
+
+# runs every day at midnight
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-requirements:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          # Allow the action to push back
+          persist-credentials: true
+
+      # 2. Set up Python and virtualenv
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Create virtual environment
+        run: python -m venv .venv
+
+      - name: Activate venv and upgrade pip
+        run: |
+          source .venv/bin/activate
+          pip install --upgrade pip
+
+      # 3. Upgrade all installed packages according to your current requirements.txt
+      - name: Upgrade requirements
+        run: |
+          source .venv/bin/activate
+          pip install --upgrade -r requirements.txt
+
+      # 4. Freeze back into requirements.txt
+      - name: Re‑freeze requirements
+        run: |
+          source .venv/bin/activate
+          pip freeze > requirements.txt
+
+      # 5. Commit & push only if there are changes
+      - name: Commit & push updated requirements
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add requirements.txt
+          if git diff --cached --quiet; then
+            echo "No changes to requirements.txt"
+          else
+            git commit -m "chore: nightly update requirements.txt"
+            git push
+          fi
