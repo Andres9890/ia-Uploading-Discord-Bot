@@ -38,3 +38,5 @@ Make sure you have the following installed before running the bot:
 ## Usage
 
 - `/upload <file(s)>`
+
+> This discord bot is licenced under the [MIT License](https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/LICENSE).
