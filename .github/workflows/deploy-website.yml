@@ -2,7 +2,7 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the website branch
   push:
     branches: ["main"]
 
@@ -28,13 +28,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Cache Jekyll dependencies
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            .jekyll-cache
+            _site
+          key: ${{ runner.os }}-jekyll-${{ hashFiles('**/*.html', '**/*.md', '**/*.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-jekyll-
+            
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
