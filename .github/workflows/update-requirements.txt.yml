@@ -1,4 +1,4 @@
-name: Update Python requirements
+name: Update requirements.txt
 
 # runs every day at midnight
 on:
