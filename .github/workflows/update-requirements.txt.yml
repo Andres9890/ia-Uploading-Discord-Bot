@@ -1,6 +1,6 @@
 name: Update requirements.txt
 
-# runs every day at midnight
+# runs every day at midnight UTC
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -31,17 +31,20 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      # 3. Upgrade all installed packages according to your current requirements.txt
-      - name: Upgrade requirements
+      # 3. Upgrade just the two packages you care about
+      - name: Upgrade discord.py & internetarchive
         run: |
           source .venv/bin/activate
-          pip install --upgrade -r requirements.txt
+          pip install --upgrade discord.py internetarchive
 
-      # 4. Freeze back into requirements.txt
-      - name: Re‑freeze requirements
+      # 4. Re‑freeze only those two into requirements.txt
+      - name: Write only discord.py & internetarchive to requirements.txt
         run: |
           source .venv/bin/activate
-          pip freeze > requirements.txt
+          # grab only those two lines
+          pip freeze \
+            | grep -E '^(discord\.py|internetarchive)==' \
+            > requirements.txt
 
       # 5. Commit & push only if there are changes
       - name: Commit & push updated requirements
