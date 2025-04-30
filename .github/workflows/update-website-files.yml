@@ -7,7 +7,6 @@ on:
       - 'requirements.txt'
     branches:
       - main
-      - website
 
 jobs:
   update-website:
@@ -42,9 +41,17 @@ jobs:
             echo "req_changed=false" >> $GITHUB_OUTPUT
           fi
       
-      - name: Update bot.py in website
+      - name: Checkout website branch
+        if: steps.check-bot.outputs.bot_changed == 'true' || steps.check-req.outputs.req_changed == 'true'
+        run: |
+          git fetch
+          git checkout website
+      
+      - name: Update bot.py in website branch
         if: steps.check-bot.outputs.bot_changed == 'true'
         run: |
+          git checkout main -- bot.py
+          
           BOT_CONTENT=$(cat bot.py)
           sed -i '/<code id="source-code" class="language-python">/,/<\/code>/c\<code id="source-code" class="language-python">'$BOT_CONTENT'<\/code>' index.html
           if [ -d "docs" ]; then
@@ -52,14 +59,16 @@ jobs:
           fi
           echo "Updated bot.py in website files"
       
-      - name: Update requirements.txt in website
+      - name: Update requirements.txt in website branch
         if: steps.check-req.outputs.req_changed == 'true'
         run: |
+          git checkout main -- requirements.txt
+          
           REQ_CONTENT=$(cat requirements.txt)
           sed -i '/<div class="requirements">/,/<\/div>/s/<pre><code>.*<\/code><\/pre>/<pre><code>'$REQ_CONTENT'<\/code><\/pre>/' index.html
           echo "Updated requirements.txt in website files"
       
-      - name: Commit and push changes
+      - name: Commit and push changes to website branch
         run: |
           git add index.html
           if [ -d "docs" ]; then
@@ -68,6 +77,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Auto-update bot code and requirements.txt"
-            git push
+            git commit -m "Auto-update bot code and requirements.txt from main branch"
+            git push origin website
           fi
