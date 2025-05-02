@@ -7,8 +7,17 @@ from datetime import datetime
 from internetarchive import upload, get_item
 import asyncio
 from typing import Optional
+from dotenv import load_dotenv
 
-DISCORD_BOT_TOKEN = "YOUR_DISCORD_BOT_TOKEN"
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the Discord bot token from the .env environment variable
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+
+# Make sure that the token exists
+if not DISCORD_BOT_TOKEN:
+    raise ValueError("Missing DISCORD_BOT_TOKEN in .env file")
 
 intents = discord.Intents.default()
 intents.messages = True

@@ -12,17 +12,92 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
   - A unique identifier
   - Descriptions based on the uploader's username and file names
 - Cleans up uploaded files after uploads
+- Uses environment variables for secure credential management
 
 ---
 
-## how to set up the bot
+## What to install
 
-- clone this repo
-- extract it in a safe folder
-- install the requirements.txt (`pip install -r requirements.txt`)
-- To set the archive.org account you want the bot to upload to, say "ia configure", it will prompt you to put in your Archive.org email and password
-- Replace the bot token in "YOUR_DISCORD_BOT_TOKEN" to your actual bot token (Using a .env is more recommended)
-- simply run the bot and it should work
+### Installing Git
+
+**Windows:**
+1. Download the Git installer from [git-scm.com](https://git-scm.com/download/win)
+2. Run the installer and follow the prompts
+3. Verify installation by opening Command Prompt and typing:
+   ```
+   git --version
+   ```
+
+**macOS:**
+1. Install using Homebrew:
+   ```
+   brew install git
+   ```
+   Or download the installer from [git-scm.com](https://git-scm.com/download/mac)
+2. Verify installation:
+   ```
+   git --version
+   ```
+
+**Linux (Ubuntu/Debian):**
+```
+sudo apt update
+sudo apt install git
+git --version
+```
+
+### Installing Python
+
+**Windows:**
+1. Download the latest Python installer from [python.org](https://www.python.org/downloads/)
+2. Run the installer, check "Add Python to PATH"
+3. Verify installation by opening Command Prompt and typing:
+   ```
+   python --version
+   pip --version
+   ```
+
+**macOS:**
+1. Install using Homebrew:
+   ```
+   brew install python
+   ```
+   Or download from [python.org](https://www.python.org/downloads/)
+2. Verify installation:
+   ```
+   python3 --version
+   pip3 --version
+   ```
+
+**Linux (Ubuntu/Debian):**
+```
+sudo apt update
+sudo apt install python3 python3-pip
+python3 --version
+pip3 --version
+```
+
+---
+
+## How to Set Up the Bot
+
+1. Clone this repo:
+   ```
+   git clone https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot.git
+   cd Archive.org-Uploading-Discord-Bot
+   ```
+3. Install the requirements.txt (`pip install -r requirements.txt`)
+4. Configure your Archive.org account:
+   - Run `ia configure` in your terminal
+   - It will prompt you to enter your Archive.org email and password
+5. Set up your Discord bot token:
+   - Create a `.env` file in the same directory as the bot.py file
+   - Add your Discord bot token to the file like this:
+     ```
+     DISCORD_BOT_TOKEN=your_actual_discord_token_here
+     ```
+   - Make sure to keep your `.env` file private and don't share it
+6. Run the bot with `python bot.py`
 
 ---
 
@@ -37,6 +112,15 @@ Make sure you have the following installed before running the bot:
 
 ## Usage
 
-- `/upload <file(s)>`
+- `/upload <file(s)>` - Upload up to 10 files to Archive.org
+- `/ping` - Test the bot's responsiveness
 
-> This discord bot is licenced under the [MIT License](https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/LICENSE).
+---
+
+## Security Note
+
+- Keep your tokens and credentials secure and private
+
+---
+
+> This discord bot is licensed under the [MIT License](https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/LICENSE).

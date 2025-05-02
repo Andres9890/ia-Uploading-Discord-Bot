@@ -37,18 +37,18 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      # 4. Upgrade only discord.py & internetarchive
-      - name: Upgrade discord.py & internetarchive
+      # 4. Upgrade discord.py, internetarchive & python-dotenv
+      - name: Upgrade discord.py, internetarchive & python-dotenv
         run: |
           source .venv/bin/activate
-          pip install --upgrade discord.py internetarchive
+          pip install --upgrade discord.py internetarchive python-dotenv
 
-      # 5. Rewrite requirements.txt with just those two packages
-      - name: Write only discord.py & internetarchive to requirements.txt
+      # 5. Rewrite requirements.txt with those packages
+      - name: Write packages to requirements.txt
         run: |
           source .venv/bin/activate
           pip freeze \
-            | grep -E '^(discord\.py|internetarchive)==' \
+            | grep -E '^(discord\.py|internetarchive|python-dotenv)==' \
             > requirements.txt
 
       # 6. Upload the updated requirements.txt
