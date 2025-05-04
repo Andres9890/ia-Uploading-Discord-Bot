@@ -121,6 +121,4 @@ Make sure you have the following installed before running the bot:
 
 - Keep your tokens and credentials secure and private
 
----
-
 > This discord bot is licensed under the [MIT License](https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/LICENSE).
