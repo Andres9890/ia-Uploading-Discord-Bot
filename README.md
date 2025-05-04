@@ -1,4 +1,4 @@
-# Archive.org Uploading Bot
+# Archive.org Uploading Discord Bot
 
 This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in a Discord server or message, It handles file attachments, generates unique identifiers for uploads, automatically creates metadata for each uploaded file
 
@@ -112,8 +112,8 @@ Make sure you have the following installed before running the bot:
 
 ## Usage
 
-- `/upload <file(s)>` - Upload up to 10 files to Archive.org
-- `/ping` - Test the bot's responsiveness
+- `/upload <file(s)>` - Upload up to 10 files to ia
+- `/ping` - Test the bot's response time
 
 ---
 
