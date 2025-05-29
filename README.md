@@ -69,7 +69,7 @@ sudo apt install python3 python3-pip
 1. Clone this repo:
    ```
    git clone https://github.com/Andres9890/ia-Uploading-Discord-Bot.git
-   cd Archive.org-Uploading-Discord-Bot
+   cd ia-Uploading-Discord-Bot
    ```
 3. Install the requirements.txt (`pip install -r requirements.txt`)
 4. Configure your Archive.org account:
