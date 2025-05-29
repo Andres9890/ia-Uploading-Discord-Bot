@@ -29,10 +29,6 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 **Windows:**
 1. Download the Git installer from [git-scm.com](https://git-scm.com/download/win)
 2. Run the installer and follow the prompts
-3. Verify installation by opening Command Prompt and typing:
-   ```
-   git --version
-   ```
 
 **macOS:**
 1. Install using Homebrew:
@@ -40,16 +36,11 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
    brew install git
    ```
    Or download the installer from [git-scm.com](https://git-scm.com/download/mac)
-2. Verify installation:
-   ```
-   git --version
-   ```
 
 **Linux (Ubuntu/Debian):**
 ```
 sudo apt update
 sudo apt install git
-git --version
 ```
 
 ### Installing Python
@@ -57,11 +48,6 @@ git --version
 **Windows:**
 1. Download the latest Python installer from [python.org](https://www.python.org/downloads/)
 2. Run the installer, check "Add Python to PATH"
-3. Verify installation by opening Command Prompt and typing:
-   ```
-   python --version
-   pip --version
-   ```
 
 **macOS:**
 1. Install using Homebrew:
@@ -69,18 +55,11 @@ git --version
    brew install python
    ```
    Or download from [python.org](https://www.python.org/downloads/)
-2. Verify installation:
-   ```
-   python3 --version
-   pip3 --version
-   ```
 
 **Linux (Ubuntu/Debian):**
 ```
 sudo apt update
 sudo apt install python3 python3-pip
-python3 --version
-pip3 --version
 ```
 
 ---
@@ -89,7 +68,7 @@ pip3 --version
 
 1. Clone this repo:
    ```
-   git clone https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot.git
+   git clone https://github.com/Andres9890/ia-Uploading-Discord-Bot.git
    cd Archive.org-Uploading-Discord-Bot
    ```
 3. Install the requirements.txt (`pip install -r requirements.txt`)
@@ -126,5 +105,3 @@ Make sure you have the following installed before running the bot:
 ## Security Note
 
 - Keep your tokens and credentials secure and private
-
-> This discord bot is licensed under the [MIT License](https://github.com/Andres9890/Archive.org-Uploading-Discord-Bot/blob/main/LICENSE).
