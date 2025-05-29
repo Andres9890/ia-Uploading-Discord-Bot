@@ -171,7 +171,8 @@ async def upload_files(
         for path in file_paths:
             if os.path.exists(path):
                 os.remove(path)
-                
+
+# Test the bot's response time
 @bot.tree.command(name="ping", description="Test the bot's reflexes")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong! `{round(bot.latency*1000)}ms`", ephemeral=False)
