@@ -1,4 +1,10 @@
+[License Button]: https://img.shields.io/badge/License-MIT-blue
+[License Link]: https://github.com/Andres9890/ia-Uploading-Discord-Bot/blob/main/LICENSE 'MIT License.'
+
+
 # Archive.org Uploading Discord Bot
+
+[![License Button]][License Link]
 
 This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in a Discord server or message, It handles file attachments, generates unique identifiers for uploads, automatically creates metadata for each uploaded file
 
