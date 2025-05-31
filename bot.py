@@ -23,11 +23,11 @@ intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="/", intents=intents)
 
 # Set up the bot with an activity status (Optional)
 activity = discord.Activity(
-    name="github.com/Andres9890/Archive.org-uploading-Discord-Bot",
+    name="github.com/Andres9890/ia-uploading-Discord-Bot",
     type=discord.ActivityType.playing,
 )
 bot.activity = activity
