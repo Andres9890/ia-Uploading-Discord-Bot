@@ -6,7 +6,7 @@
 
 [![License Button]][License Link]
 
-This is a Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file
+This is a Discord bot that allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file
 
 ---
 
