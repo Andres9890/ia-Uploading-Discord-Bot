@@ -1,24 +1,23 @@
-[License Button]: https://img.shields.io/badge/License-MIT-blue
+[License Button]: https://img.shields.io/badge/License-MIT-black
 [License Link]: https://github.com/Andres9890/ia-Uploading-Discord-Bot/blob/main/LICENSE 'MIT License.'
 
 
-# Archive.org Uploading Discord Bot
+# IA Uploading Discord Bot
 
 [![License Button]][License Link]
 
-This Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in a Discord server or message, It handles file attachments, generates unique identifiers for uploads, automatically creates metadata for each uploaded file
+This is a Discord bot allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file
 
 ---
 
 ## Features
 
-- Upload files to Archive.org with a `/upload` command
-- Supports multiple file attachments in a single command
-- Automatically generates metadata for each upload, including:
+- Uploads files to Archive.org with a `/upload` command
+- Supports 10 file attachments in a single command
+- Automatically makes metadata for each upload, including:
   - A unique identifier
   - Descriptions based on the uploader's username and file names
 - Cleans up uploaded files after uploads
-- Uses environment variables for secure credential management
 
 ---
 
@@ -29,13 +28,14 @@ This Discord bot allows users to upload files directly to [Archive.org](https://
 **Windows:**
 1. Download the Git installer from [git-scm.com](https://git-scm.com/download/win)
 2. Run the installer and follow the prompts
+- Note: make sure to install it in PATH
 
 **macOS:**
 1. Install using Homebrew:
    ```
    brew install git
    ```
-   Or download the installer from [git-scm.com](https://git-scm.com/download/mac)
+- Or download the installer from [git-scm.com](https://git-scm.com/download/mac)
 
 **Linux (Ubuntu/Debian):**
 ```
@@ -47,14 +47,15 @@ sudo apt install git
 
 **Windows:**
 1. Download the latest Python installer from [python.org](https://www.python.org/downloads/)
-2. Run the installer, check "Add Python to PATH"
+2. Run the installer
+- Note: make sure to install it in PATH
 
 **macOS:**
 1. Install using Homebrew:
    ```
    brew install python
    ```
-   Or download from [python.org](https://www.python.org/downloads/)
+- Or download from [python.org](https://www.python.org/downloads/)
 
 **Linux (Ubuntu/Debian):**
 ```
@@ -71,15 +72,15 @@ sudo apt install python3 python3-pip
    git clone https://github.com/Andres9890/ia-Uploading-Discord-Bot.git
    cd ia-Uploading-Discord-Bot
    ```
-3. Install the requirements.txt (`pip install -r requirements.txt`)
-4. Configure your Archive.org account:
+3. Install the required packages (`pip install -r requirements.txt`)
+4. Configure your IA account:
    - Run `ia configure` in your terminal
    - It will prompt you to enter your Archive.org email and password
 5. Set up your Discord bot token:
    - Create a `.env` file in the same directory as the bot.py file
    - Add your Discord bot token to the file like this:
      ```
-     DISCORD_BOT_TOKEN=your_actual_discord_token_here
+     DISCORD_BOT_TOKEN=discord token here
      ```
    - Make sure to keep your `.env` file private and don't share it
 6. Run the bot with `python bot.py`
@@ -97,11 +98,5 @@ Make sure you have the following installed before running the bot:
 
 ## Usage
 
-- `/upload <file(s)>` - Upload up to 10 files to ia
+- `/upload <file(s)>` - Upload up to 10 files to IA
 - `/ping` - Test the bot's response time
-
----
-
-## Security Note
-
-- Keep your tokens and credentials secure and private
