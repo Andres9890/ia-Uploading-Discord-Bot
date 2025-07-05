@@ -3,8 +3,8 @@
 
 
 # IA Uploading Discord Bot
-
 [![License Button]][License Link]
+[![Discord](https://img.shields.io/discord/1330184232894595072.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/ZrpCUxzEUk)
 
 This is a Discord bot that allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file
 
