@@ -91,6 +91,7 @@ sudo apt install python3 python3-pip
 
 Make sure you have the following installed before running the bot:
 
+- An IA account
 - Python 3.8 and up
 - Required python packages (`requirements.txt`)
 
