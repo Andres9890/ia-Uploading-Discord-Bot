@@ -3,6 +3,8 @@
 [Discord Button]: https://img.shields.io/discord/1330184232894595072.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2
 [Discord Link]: https://discord.gg/ZrpCUxzEUk 'Our discord server.'
 
+<img align="left" width="90" height="100" src="icon/IA_logo.png">
+
 # IA Uploading Discord Bot
 [![License Button]][License Link]
 [![Discord Button]][Discord Link]
