@@ -10,20 +10,20 @@ jobs:
   update-requirements:
     runs-on: ubuntu-latest
     steps:
-      # 1. Check out the repo
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Check out the repo
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           persist-credentials: true
 
-      # 2. Upload the original requirements.txt
+      # Upload the original requirements.txt
       - name: Upload old requirements.txt
         uses: actions/upload-artifact@v4
         with:
           name: old-requirements
           path: requirements.txt
 
-      # 3. Set up Python & venv
+      # Set up Python & venv
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -37,13 +37,13 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
 
-      # 4. Upgrade discord.py, internetarchive & python-dotenv
+      # Upgrade discord.py, internetarchive & python-dotenv
       - name: Upgrade discord.py, internetarchive & python-dotenv
         run: |
           source .venv/bin/activate
           pip install --upgrade discord.py internetarchive python-dotenv
 
-      # 5. Rewrite requirements.txt with those packages
+      # Rewrite requirements.txt with those packages
       - name: Write packages to requirements.txt
         run: |
           source .venv/bin/activate
@@ -51,14 +51,14 @@ jobs:
             | grep -E '^(discord\.py|internetarchive|python-dotenv)==' \
             > requirements.txt
 
-      # 6. Upload the updated requirements.txt
+      # Upload the updated requirements.txt
       - name: Upload updated requirements.txt
         uses: actions/upload-artifact@v4
         with:
           name: updated-requirements
           path: requirements.txt
 
-      # 7. Commit & push if anything changed
+      # Commit & push if anything changed
       - name: Commit & push updated requirements
         run: |
           git config user.name "github-actions[bot]"
@@ -67,6 +67,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to requirements.txt"
           else
-            git commit -m "keep requirements.txt up to date"
+            git commit -m "Keep requirements.txt up to date"
             git push
           fi

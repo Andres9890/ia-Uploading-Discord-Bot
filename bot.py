@@ -23,11 +23,11 @@ intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="/", intents=intents)
 
 # Set up the bot with an activity status (Optional)
 activity = discord.Activity(
-    name="github.com/Andres9890/Archive.org-uploading-Discord-Bot",
+    name="github.com/Andres9890/ia-uploading-Discord-Bot",
     type=discord.ActivityType.playing,
 )
 bot.activity = activity
@@ -171,7 +171,8 @@ async def upload_files(
         for path in file_paths:
             if os.path.exists(path):
                 os.remove(path)
-                
+
+# Test the bot's response time
 @bot.tree.command(name="ping", description="Test the bot's reflexes")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong! `{round(bot.latency*1000)}ms`", ephemeral=False)
