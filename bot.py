@@ -113,9 +113,9 @@ async def upload_files(
     #  If only one file, use the sanitized filename as the base
     #  If multiple, use a "discord-upload-{username}" style base
     if file_count == 1:
-        base_item_id = re.sub(r'[^a-z0-9._-]', '_', attachments[0].filename.lower())
+        base_item_id = re.sub(r'[^a-zA-Z0-9._-]', '_', attachments[0].filename)
     else:
-        base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}".lower()
+        base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}"
 
     # First try using the base ID without a timestamp to make sure
     item_id = base_item_id
