@@ -232,10 +232,24 @@ async def upload_files(
 
     # Prepare the metadata
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
+    
+    # Extract file formats from all attachments
+    file_formats = set()
+    for attachment in attachments:
+        # Get file extension
+        ext = os.path.splitext(attachment.filename)[1].lstrip('.')
+        if ext:
+            file_formats.add(ext.lower())
+    
+    # Create subject tags
+    subject_tags = ["Discord", "files", interaction.user.name]
+    subject_tags.extend(sorted(file_formats))  # Add file formats
+    
     metadata = {
         "scanner": "Internet Archive Discord Bot Uploader",
         "collection": "opensource_media",
         "creator": interaction.user.name,
+        "subject": subject_tags,
     }
 
     # Add the date metadata if successfully retrieved
