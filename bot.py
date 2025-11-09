@@ -235,11 +235,14 @@ async def upload_files(
     metadata = {
         "scanner": "Internet Archive Discord Bot Uploader",
         "collection": "opensource_media",
+        "creator": interaction.user.name,
     }
 
     # Add the date metadata if successfully retrieved
     if file_date:
         metadata["date"] = file_date
+        # Extract year from the date
+        metadata["year"] = file_date.split("-")[0]
 
     if file_count == 1:
         # for Single files use the filename in the title/description
