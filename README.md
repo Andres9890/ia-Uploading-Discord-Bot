@@ -9,7 +9,7 @@
 [![License Button]][License Link]
 [![Discord Button]][Discord Link]
 
-This is a Discord bot that allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a simple command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file
+IA Uploading is a Discord bot that allows users to upload files directly to [Archive.org](https://archive.org) (using the internetarchive python library) via a slash command in Discord, It handles file attachments, generates unique identifiers for uploads, and also creates metadata for each uploaded file with support for custom metadata fields
 
 ---
 
@@ -17,9 +17,11 @@ This is a Discord bot that allows users to upload files directly to [Archive.org
 
 - Uploads files to Archive.org with a `/upload` command
 - Supports 10 file attachments in a single command
+- Supports adding your own metadata to uploads
 - Automatically makes metadata for each upload, including:
   - A unique identifier
   - Descriptions based on the uploader's username and file names
+  - User custom metadata fields
 - Cleans up uploaded files after uploads
 
 ---
@@ -104,3 +106,21 @@ Make sure you have the following installed before running the bot:
 
 - `/upload <file(s)>` - Upload up to 10 files to IA
 - `/ping` - Test the bot's response time
+
+### Custom Metadata
+
+You can add custom metadata to your uploads using the `custom_metadata` parameter in the `/upload` command, Metadata should be provided in `meta=data` format, with multiple fields separated by commas
+
+Format:
+```
+meta=data,meta2=data2,meta3=data3
+```
+
+Example:
+```
+/upload file:myfile.pdf custom_metadata:creator=Someone,subject=Images,collection=somecollection
+```
+
+## License
+
+This project is licensed under the MIT License, see the [`LICENSE`](LICENSE) file for more details

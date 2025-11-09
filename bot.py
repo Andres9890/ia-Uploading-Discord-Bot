@@ -47,6 +47,41 @@ async def check_item_exists(item_id):
         # If there's an error, the item doesn't exist
         return False
 
+def parse_custom_metadata(metadata_string):
+    """
+    Parse comma-separated key=value pairs into a dictionary.
+    Example: "creator=John Doe,subject=Python,collection=opensource"
+    Returns: {"creator": "John Doe", "subject": "Python", "collection": "opensource"}
+    """
+    if not metadata_string:
+        return {}
+    
+    metadata = {}
+    # Split by comma
+    pairs = metadata_string.split(',')
+    
+    for pair in pairs:
+        pair = pair.strip()
+        if '=' not in pair:
+            continue
+        
+        # Split by first equals sign only
+        key, value = pair.split('=', 1)
+        key = key.strip()
+        value = value.strip()
+        
+        if key and value:
+            # Handle multiple values for the same key (create a list)
+            if key in metadata:
+                if isinstance(metadata[key], list):
+                    metadata[key].append(value)
+                else:
+                    metadata[key] = [metadata[key], value]
+            else:
+                metadata[key] = value
+    
+    return metadata
+
 @bot.event
 async def on_ready():
     await bot.tree.sync()
@@ -64,6 +99,7 @@ async def on_ready():
     file8="Optional file (up to 100MB)",
     file9="Optional file (up to 100MB)",
     file10="Optional file (up to 100MB)",
+    custom_metadata="Optional custom metadata (format: meta=data,meta=data)"
 )
 async def upload_files(
     interaction: discord.Interaction,
@@ -76,11 +112,13 @@ async def upload_files(
     file7: Optional[discord.Attachment] = None,
     file8: Optional[discord.Attachment] = None,
     file9: Optional[discord.Attachment] = None,
-    file10: Optional[discord.Attachment] = None
+    file10: Optional[discord.Attachment] = None,
+    custom_metadata: Optional[str] = None
 ):
     """
     Slash command that uploads up to 10 attachments to Archive.org
     The first file is required, the other 9 are optional
+    Custom metadata can be provided in meta=data format, separated by commas
     """
 
     # Defer the interaction since uploading can take time
@@ -126,10 +164,20 @@ async def upload_files(
         item_id = generate_unique_id(base_item_id)
         await interaction.followup.send(f"Identifier `{base_item_id}` already exists, using `{item_id}` instead.")
 
+    # Parse custom metadata if provided
+    custom_meta = {}
+    if custom_metadata:
+        try:
+            custom_meta = parse_custom_metadata(custom_metadata)
+            if custom_meta:
+                await interaction.followup.send(f"Custom metadata parsed: {', '.join([f'{k}={v}' for k, v in custom_meta.items()])}")
+        except Exception as e:
+            await interaction.followup.send(f"Error parsing custom metadata: {e}")
+
     # Prepare the metadata (You can change it to whatever you want)
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
     metadata = {
-        "scanner": "Discord Bot",
+        "scanner": "Internet Archive Discord Bot Uploader",
         "collection": "opensource_media",
     }
 
@@ -148,6 +196,9 @@ async def upload_files(
                 f"Uploaded files:\n{file_list_str}"
             ),
         })
+
+    # Merge custom metadata into the default metadata
+    metadata.update(custom_meta)
 
     # Run the upload in a separate thread to prevent Rate-limiting
     def do_upload():
