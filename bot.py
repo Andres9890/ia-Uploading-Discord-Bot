@@ -8,6 +8,7 @@ from internetarchive import upload, get_item
 import asyncio
 from typing import Optional
 from dotenv import load_dotenv
+import platform
 
 # Load environment variables from .env file
 load_dotenv()
@@ -46,6 +47,52 @@ async def check_item_exists(item_id):
     except Exception:
         # If there's an error, the item doesn't exist
         return False
+
+def get_file_creation_date(file_path):
+    """
+    Get the creation date of a file and return it in YYYY-MM-DD format.
+    On Unix systems, this returns the last modification time as creation time may not be available.
+    """
+    try:
+        # Try to get creation time (works on Windows)
+        if platform.system() == 'Windows':
+            timestamp = os.path.getctime(file_path)
+        else:
+            # On Unix, use modification time as creation time might not be reliable
+            stat = os.stat(file_path)
+            # Try to get birth time (macOS) or fall back to modification time
+            timestamp = getattr(stat, 'st_birthtime', stat.st_mtime)
+        
+        # Convert timestamp to datetime and format as YYYY-MM-DD
+        date = datetime.fromtimestamp(timestamp)
+        return date.strftime("%Y-%m-%d")
+    except Exception:
+        # If there's an error, return None
+        return None
+
+def get_oldest_file_date(file_paths):
+    """
+    Get the creation date of the oldest file from a list of file paths.
+    Returns the date in YYYY-MM-DD format.
+    """
+    oldest_date = None
+    oldest_timestamp = None
+    
+    for file_path in file_paths:
+        try:
+            if platform.system() == 'Windows':
+                timestamp = os.path.getctime(file_path)
+            else:
+                stat = os.stat(file_path)
+                timestamp = getattr(stat, 'st_birthtime', stat.st_mtime)
+            
+            if oldest_timestamp is None or timestamp < oldest_timestamp:
+                oldest_timestamp = timestamp
+                oldest_date = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
+        except Exception:
+            continue
+    
+    return oldest_date
 
 def parse_custom_metadata(metadata_string):
     """
@@ -174,12 +221,25 @@ async def upload_files(
         except Exception as e:
             await interaction.followup.send(f"Error parsing custom metadata: {e}")
 
-    # Prepare the metadata (You can change it to whatever you want)
+    # Get file creation date(s)
+    file_date = None
+    if file_count == 1:
+        # For single file, get its creation date
+        file_date = get_file_creation_date(file_paths[0])
+    else:
+        # For multiple files, get the oldest file's creation date
+        file_date = get_oldest_file_date(file_paths)
+
+    # Prepare the metadata
     file_list_str = "\n".join([os.path.basename(fp) for fp in file_paths])
     metadata = {
         "scanner": "Internet Archive Discord Bot Uploader",
         "collection": "opensource_media",
     }
+
+    # Add the date metadata if successfully retrieved
+    if file_date:
+        metadata["date"] = file_date
 
     if file_count == 1:
         # for Single files use the filename in the title/description
