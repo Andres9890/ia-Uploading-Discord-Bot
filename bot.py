@@ -38,6 +38,14 @@ def generate_unique_id(base_id):
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     return f"{base_id}-{timestamp}"
 
+def sanitize_identifier_component(value, fallback="item"):
+    """Make sure identifier components only have allowed characters."""
+    if not value:
+        return fallback
+    sanitized = re.sub(r'[^a-zA-Z0-9._-]', '_', value)
+    sanitized = sanitized.strip('_')
+    return sanitized or fallback
+
 async def check_item_exists(item_id):
     """Check if an item with the given identifier already exists on Archive.org"""
     try:
@@ -195,12 +203,18 @@ async def upload_files(
     await interaction.followup.send(f"Uploading {file_count} file(s) to Archive.org...")
 
     # Generate an item identifier
-    #  If only one file, use the sanitized filename as the base
-    #  If multiple, use a "discord-upload-{username}" style base
+    username_component = sanitize_identifier_component(interaction.user.name, fallback="user")
     if file_count == 1:
-        base_item_id = re.sub(r'[^a-zA-Z0-9._-]', '_', attachments[0].filename)
+        filename_root, file_ext = os.path.splitext(attachments[0].filename)
+        filename_component = sanitize_identifier_component(filename_root, fallback="file")
+        base_item_id = f"discord-upload-{username_component}-{filename_component}"
+        extension_component = ""
+        if file_ext:
+            extension_component = sanitize_identifier_component(file_ext.lstrip('.'), fallback="")
+        if extension_component:
+            base_item_id = f"{base_item_id}.{extension_component}"
     else:
-        base_item_id = f"discord-upload-{interaction.user.name.replace(' ', '_')}"
+        base_item_id = f"discord-upload-{username_component}"
 
     # First try using the base ID without a timestamp to make sure
     item_id = base_item_id
